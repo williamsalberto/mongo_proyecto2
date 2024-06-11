@@ -3,22 +3,21 @@ const { MongoClient } = require('mongodb');
 
 const uri = "mongodb://localhost:27017";
 
-// Función principal
+
 async function insertDocuments() {
-  // Crear una nueva instancia del cliente MongoClient
+
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
   try {
-    // Conectar al servidor MongoDB
+  
     await client.connect();
 
     console.log("Conectado a MongoDB");
 
-    // Seleccionar la base de datos y la colección
     const db = client.db('Club_Video');
     const collection = db.collection('movies');
 
-    // Insertar documentos en la colección
+
     const result = await collection.insertMany([
       {
         titulo: "Fight Club",
@@ -55,7 +54,7 @@ async function insertDocuments() {
         escritor: "J.R.R. Tolkien",
         year: 2014,
         franquicia: "The Hobbit",
-        sinopsis: "Bilbo and his company must face a war against various opponents to prevent the Lonely Mountain from falling into darkness."
+        sinopsis: "Bilbo y su compañía deben enfrentarse a una guerra contra diversos oponentes para evitar que la Montaña Solitaria caiga en manos de la oscuridad"
       },
       {
         titulo: "Pee Wee Herman’s Big Adventure"
@@ -69,11 +68,10 @@ async function insertDocuments() {
   } catch (error) {
     console.error("Error en la ejecución:", error);
   } finally {
-    // Cerrar la conexión
+   
     await client.close();
     console.log("Conexión cerrada");
   }
 }
 
-// Ejecutar la función principal
 insertDocuments().catch(console.error);
